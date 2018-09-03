@@ -39,3 +39,12 @@ func (this *factory) Get(name string, val interface{}) error {
 	outputVal.Set(reflect.ValueOf(v))
 	return nil
 }
+
+func (this *factory) GetInterface(name string) (interface{}, error) {
+	v, ok := this.container[name]
+	if !ok {
+		return nil, E_NOT_FOUND
+	}
+
+	return v, nil
+}
