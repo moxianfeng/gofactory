@@ -48,3 +48,11 @@ func (this *factory) GetInterface(name string) (interface{}, error) {
 
 	return v, nil
 }
+
+var (
+	defaultFactory = NewFactory()
+)
+
+func DefaultFactory() *factory {
+	return defaultFactory
+}
