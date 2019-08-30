@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+# gazelle:prefix github.com/moxianfeng/gofactory
+
+go_library(
+    name = "go_default_library",
+    srcs = ["gofactory.go"],
+    importpath = "github.com/moxianfeng/gofactory",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["gofactory_test.go"],
+    embed = [":go_default_library"],
+)
