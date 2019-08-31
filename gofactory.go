@@ -23,7 +23,7 @@ func (this *factory) Register(name string, val interface{}) {
 	this.container[name] = val
 }
 
-func (this *factory) Get(name string, val interface{}) error {
+func (this *factory) GetObject(name string, val interface{}) error {
 	v, ok := this.container[name]
 	if !ok {
 		return E_NOT_FOUND
@@ -40,7 +40,22 @@ func (this *factory) Get(name string, val interface{}) error {
 	return nil
 }
 
-func (this *factory) GetInterface(name string) (interface{}, error) {
+func (this *factory) GetInterface(name string, val interface{}) (interface{}, error) {
+	v, ok := this.container[name]
+	if !ok {
+		return nil, E_NOT_FOUND
+	}
+
+	targetType := reflect.TypeOf(val).Elem()
+
+	if !reflect.TypeOf(v).Implements(targetType) {
+		return nil, E_INVALID_ARGUMENT
+	}
+
+	return v, nil
+}
+
+func (this *factory) GetAny(name string) (interface{}, error) {
 	v, ok := this.container[name]
 	if !ok {
 		return nil, E_NOT_FOUND
