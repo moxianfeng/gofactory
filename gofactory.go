@@ -40,6 +40,7 @@ func (this *factory) GetObject(name string, val interface{}) error {
 	return nil
 }
 
+// For example I is an interface, you can call GetInterface in two way. factroy.GetInterface("xxxx", new(I)) or factory.GetInterface("xxxx", (*I)(nil))
 func (this *factory) GetInterface(name string, val interface{}) (interface{}, error) {
 	v, ok := this.container[name]
 	if !ok {

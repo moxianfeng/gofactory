@@ -39,7 +39,7 @@ func Test_Interface(t *testing.T) {
 		t.Fatal("Type not match, expect got error")
 	}
 
-	v, e = Default.GetInterface("interface", new(T))
+	v, e = Default.GetInterface("interface", (*T)(nil))
 	if nil != e {
 		t.Fatal(e)
 	}
